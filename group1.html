@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png"> -->
+
+    <title>CHILE 2014</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.2/yeti/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    
+        <script type="text/javascript" src="http://latex.codecogs.com/latexit.js"></script>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="index.html">Home</a></li>
+          <li><a href="group1.html">Group 1</a></li>
+          <li><a href="group2.html">Group 2</a></li>
+          <li><a href="group3.html">Group 3</a></li>
+          <li><a href="https://github.com/chornbaker/CHILE_2014?" target="_blank">Code</a></li>
+        </ul>
+        <h3 class="text-muted">CHILE 2014</h3>
+      </div>
+
+      <div class="container">
+        <h2>Chile-Harvard Innovative Learning Exchange (CHILE) 2014</h2>
+      </div>
+	<div class="jumbotron">
+          <iframe src="//player.vimeo.com/video/85659466?color=ffffff" width="520" height="293" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </div>
+
+
+      <div class="row marketing">
+        <div class="col-md-12">
+
+        <h3> Introduction </h3>
+
+	<p> The  Victor M. Blanco telescope at the observatory cerro tololo (CTIO) is one of the telescopes used in the 90’s decade to measure the expansion of the universe and its deceleration,  but the astronomers got surprised when they discovered that indeed it was being the opposite, the expansion was being accelerated by something.  A new instrument called the Dark Energy Camera (DECam) was installed in 2012. </p>
+
+	<p> This camera contains 61 CCD’s, each one of 520 Mpix and a total field of view of 2.2 degrees. It was designed to make surveys of extragalactic objects to have a better comprehension of what is causing this accelerated expansion.</p>
+
+	<p> The Chile-Harvard Innovative Learning Exchange Program, in which students from various background worked on such data sets in Chile for two weeks. </p>
+
+
+	<h3> Data </h3>
+	<ul>
+		<li> Raw CCD images from the Victor M. Blanco Telescope’s Dark Energy Camera (DECam) at CTIO. </li>
+		<li> 64 CCDs / 40 fields of view / 16 epochs over 4 nights. </li> 
+		<li> Over 1 TB of raw image data per night. </li>
+		<li> Unique combination of cadence, depth and field of view. </li>
+		<li> Allows the study of objects that vary in the U band with time-scales of a few hours in a large volume of the Universe. </li>
+	</ul>
+        <h3> Aim </h3>
+
+	<p> Develop fast, cost-effective computational methods to process and analyze DECam data in order to construct light curves in the U band. </p>
+
+
+	<h3> Procedure </h3>
+	
+	<ol>
+		<li> Detect pixels with high values and measure the background level and noise: </li>
+
+		<p> For each CCD, we first identify the pixels with large ADU values using 99.6% quantile This gives a binary image of 'bright pixels', which are possible sources, and 'faint pixels', which we use to estimate background.</p>
+
+		<li> Identify blocks: </li>
+	
+		<p> We single out possible sources by finding the smallest blocks containing connected 'bright pixels'. </p>
+	
+		<li> Cosmic rays test: </li>
+	
+		<p> For each small block, we calculate the skewness and kurtosis of the observed ADUs to rule out cosmic rays.</p>
+
+		<li> Gaussian fit: position, shape, pixel coordinates: </li>
+		
+		<p> We fit a Gaussian model to construct a catalogue containing positions <span lang="latex"> (\mu_{x}, \ \mu_{y}) </span>, flux <span lang="latex"> A </span>, spread <span lang="latex"> (\sigma_{x}, \ \sigma_{y}) </span> , inclination <span lang="latex"> \rho </span> and errors of the the sources for each CCD, field and epoch.</p>
+		
+		<center>
+		<div lang="latex">
+		I_{x,y}= \frac{A}{2 \pi \sigma_{x} \sigma_{y}\sqrt{1-\rho^{2}}}exp(-\frac{1}{1-\rho^{2}}[\frac{(x-\mu_{x})^{2}}{2\sigma_{x}^{2}}+\frac{(y-\mu_{y})^{2}}{2\sigma_{y}^{2}}-\frac{\rho (x-\mu_{x})(y-\mu_{y})}{\sigma_{x} \sigma_{y}}])
+		</div>
+		</center>
+
+
+		<p> In the following image is presented a 1D cut of the CCD centered on a star and the corresponding gaussian fit.</p> 
+		<center>
+        	  <img class="" src="img/1dgauss.png" width="120%" height="120%" />
+		</center>
+        	<p> A heat map comparing the raw image and the model image after the gaussian fit is presented below.</p>
+       		<center>
+        	  <img class="" src="img/2dgauss.png" width="130%" height="130%" />
+		</center>
+
+		<p> An example of just a fraction of a CCD image with stars and cosmic rays. </p>
+		<center>
+        	  <img class="" src="img/rawdata.png" width="80%" height="80%" />
+		</center>
+		<p> And its corresponding model image after we found the sources and performed the fit.</p>
+		<center>
+	          <img class="" src="img/modelimage.png" width="100%" height="100%" />
+	        </center>
+
+
+		<li> Transform to celestial world coordinates: </li>
+	
+		<p> Using the header information of each fits file, we transform the position of the sources and its errors to world celestial coordinates (Right Ascension  and Declination). An example of a arbitrary region of one of the 40 fields is presented below. </p>
+ 
+ 		<center>
+	          <img class="" src="img/stars.png" width="100%" height="100%" />
+	        </center>
+	        
+		<li> Calibration with Standard stars from the Sloan Digital Sky Survey (SDSS): </li>
+	
+		<p> The previous steps were done also for observations pointing to standard fields. One of them was a field covered by the Sloan Digital Sky Survey, and it was used for transform from ADU to magnitudes in the U band. </p>
+ 
+		<li>  Matching between epochs: </li>
+	
+		<p> Finally we took the 16 corresponding catalogues for each CCD and field. Using the position in celestial coordinates and its errors in each epoch, we performed a matching of the objects through the different epochs. After this we had 16 catalogues for the same region of the sky, with a ID for each object and its magnitudes at different epochs, i.e. we obtaied light curves for the different objects found in the 40 fields. </p>
+	</ol>
+
+
+	<h3> Future work </h3>
+	<ul>
+	<li> Improve the cosmic ray detection. </li>
+	<li> Add gaussian mixture in order to detext sources that could be very close. </li>
+	<li> Use a more realistic profile for the Point Spread Function (PSF) </li>
+	<li> Use others standard fields. </li>
+	<li> Improve the distance function using additional measurement like the flux (or something similar) in the object-matching process. </li>
+	</ul>
+
+        </div>  
+	</div>    
+	<div class="footer">
+        <p><b>Group 1:</b> Yang Chen, Jheser Guzman, Sebastian Marino, Zongyi Zhang</p>
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
