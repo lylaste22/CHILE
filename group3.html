@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png"> -->
+
+    <title>CHILE 2014</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.2/yeti/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="index.html">Home</a></li>
+          <li><a href="group1.html">Group 1</a></li>
+          <li><a href="group2.html">Group 2</a></li>
+          <li><a href="group3.html">Group 3</a></li>
+          <li><a href="https://github.com/chornbaker/CHILE_2014?" target="_blank">Code</a></li>
+        </ul>
+        <h3 class="text-muted">CHILE 2014</h3>
+      </div>
+
+      <div class="container">
+        <h2>Chile-Harvard Innovative Learning Exchange (CHILE) 2014</h2>
+      </div>
+	<div class="jumbotron">
+          <iframe src="//player.vimeo.com/video/85625263?color=ffffff" width="520" height="293" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </div>
+
+
+      <div class="row marketing">
+        <div class="col-md-12">
+
+        <p>
+        In the first portion of Group 3's project, we created a tool that searches astronomical databases (NED, Simbad, NRAO, UKIDSS, Vizier, SDSS), returning in .csv form the existing information about searched celestial objects. 
+        The serial and distributed programs are available for download and use, and the README can be found here: <a href="url">http://bit.ly/NhuJa9</a>.
+        </p>
+        
+        <p>
+        In the second portion of the project, we use a non-parametric Gaussian Process with a periodic exponential correlation function to fit the light curves of periodic variable stars.  This allows the light curves to have any shape, as long as it is periodic; 
+        that is, we do not impose a model.  We find the period from a Lomb-Scargle periodogram; the errors from this and the regression process form the confidence interval.
+        </p>
+        
+        <p>
+        In order to determine the associated cost of future observations, we first determine the time at which “expected information” (EI) is maximized. EI is a measure that depends on Shannon entropy (Loredo 2004).
+        </p>
+        <center>
+          <img class="" src="img/group3_loredo.png" width="45%" height="45%" />
+        </center>
+        
+        <p>
+        Next, we define cost in terms of the amount of time it takes to get additional observations on twelve telescopes (including, for example, Gemini, VLT, Magellan, SOAR) and different bands (u, g, r, i, z, J, H, Ks):
+        </p>
+        <center>
+          <img class="" src="img/group3_cost.png" width="30%" height="30%" />
+        </center>
+        
+        These cost measures are then used with the EI calculated in the previous step to provide a set of cost-benefit analysis that is usable by researchers. 
+	</p>
+        <center>
+          <img class="" src="img/group3_image.png" width="100%" height="100%" />
+        </center>
+
+
+        </div>  
+	</div>    
+	<div class="footer">
+        <p><b>Group 3:</b> Regis Cartier, Lehman Garrison, Anita Mehrotra, Francisco Richter</p>
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
