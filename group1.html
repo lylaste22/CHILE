@@ -72,11 +72,21 @@
 	</ul>
         <h3> Aim </h3>
 
-	<p> Develop a pipeline that extract light curves, removing Cosmic Rays, and generate a catalog for the images. </p>
+	<p> Develop a pipeline that takes a raw CCD image, identifies objects and extracts their light curves, removes Cosmic Rays, and generates a catalog with useful information to be later used in the classification work.  </p>
 
 
 	<h3> Procedure </h3>
+	<h4> Cosmic ray rejection  </h2>
+
+	<p> Conventional approaches to detect and eliminate cosmic rays from images rely on the difference in contrast between the cosmic ray and its surrounding environment. These types of algorithms may generate inaccurate results when the PSF Point Spread Function is smaller than the cosmic ray. A more reliable approach for discriminating between low resolution point sources and cosmic-rays was developed by Pieter van Dokkum based on a variation of Laplacian edge detection. This method is widely used for highlighting boundaries in digital images.  The algorithm identifies cosmic-rays of arbitrary shapes and sizes by the sharpness of their edges. Therefore, it is largely independent of the morphology of cosmic-rays. This property is very useful, and forms the basis for a robust discrimination between poorly sampled point sources and cosmic-rays as it is it is largely independent of their morphology. </p>
+	<p> The python module Cosmics is used to detect and clean up cosmic ray hits on images based on Pieter van Dokkum's Laplacian algorithm. The module can handle images in FITS format. The cosmics module requires tuning on several parameters.</p>
+  
+	<h4> Object Identification  </h2>
 	
+	<h4> Light Curve Extraction  </h2>
+	
+	<h4> Cross-Reference with Virtual Catalogs  </h2>
+
 	<ol>
 		<li> Detect pixels with high values and measure the background level and noise: </li>
 
