@@ -1,0 +1,15 @@
+Example of python + openmp (shared memory paralelism) + slurm (bash) scripting + coding
+
+how to use it?
+
+module load astro
+cd test_omp
+make
+cd ..
+squeue myscript.slurm
+
+check the results files
+
+enjoy
+
+JcM
