@@ -6,7 +6,8 @@ module load astro
 cd test_omp
 make
 cd ..
-squeue myscript.slurm
+sbatch myscript.slurm
+squeue
 
 check the results files
 
