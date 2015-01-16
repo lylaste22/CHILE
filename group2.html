@@ -75,7 +75,7 @@ table, th, td {
           <img class="" src="images/group2_flowchart.png" width="70%" height="70%"/>
         </center>
         
-        <h3>Moving/non-moving object classifier</h3>
+        <h3>Moving/Non-moving object classifier</h3>
         <p>To do the classification between moving and non-moving objects, we ran the DBSCAN clustering algorithm on a dataset which included the detections on all 20 epochs. DBSCAN is a density-based clustering algorithm which puts in the same cluster two elements if they have a distance less than a specific threshold, and it doesn't need the number of clusters as a parameter. In this case, each cluster represented a non-moving astronomical object, while non clustered objects represented a moving object than can either be an asteroid or an artifact. We used 0.003 degrees (about 1.08 arseconds) as the distance threshold parameter for DBSCAN and only considered clusters with at least three samples. </p>
 
         <center>
@@ -83,7 +83,7 @@ table, th, td {
         </center>
        
         
-        <h3>Stars/Galaxied detection</h3>
+        <h3>Stars and Galaxies detection</h3>
         <p>Between all the features SExtractor gives, there is a CLASS_STAR feature that is a value between 0 and 1 which represents how confident is SExtractor to classify this detection as a star. We assumed that we could label as Star every object with a CLASS_STAR value greater than 0.9 and label as Galaxy all the objects with less than 0.1 in this feature. For each cluster, we considered the median of all its members.</p>
                 <p>Between all the features SExtractor gives, there is a CLASS_STAR feature that is a value between 0 and 1 which represents how confident is SExtractor to classify this detection as a star. We assumed that we could label as Star every object with a CLASS_STAR value greater than 0.9 and label as Galaxy all the objects with less than 0.1 in this feature. For this purpuse, we considered the median of its members in each cluster.All the other clusters which its medians where between 0.1 we labeld them as indeterminated</p>
 	<p>After this, we used supervised learing to clasify the indetermined objects based on our labeled set and 24 features given by SExtractor.
