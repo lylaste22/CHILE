@@ -64,16 +64,24 @@
 
 	<h3> Data </h3>
 	<ul>
-		<li> forty fields observed. </li>
-		<li> during four nights. </li> 
-		<li> every image covers 3 sq. deg. </li>
+		<li> Forty fields observed during four nights </li>
+		<li> Every image covers 3 sq. deg. </li>
 		<li> four times per nights (160 or 180 sec per exposure). </li>
 		<li> g filter was used. </li>
+		<li></li> 61458 output files corresponding to 20486 processed images </li>
 	</ul>
+	
         <h3> Aim </h3>
+        Develop a pipeline in the cluster to process the 26K images completing the following tasks:
+	<ol>
+		<li> Collect all the available raw CCD images available in fitz format </li>
+		<li> Obtain image meta data from the fitz header </li>
+		<li> Remove cosmic rays using specific image read-noise and gain per CCD </li>
+		<li> Identify astronomical objects in each image using parameters from meta-data extracted </li>
+		<li> Generate a catalog with a list of all identified objects per image and additional information to be later used in the classification work </li>
+		<li> Cross reference with Virtual Observatory to pull additional information for known objects </li>
 
-	<p> Develop a pipeline that takes a raw CCD image, identifies objects and extracts their light curves, removes Cosmic Rays, and generates a catalog with useful information to be later used in the classification work.  </p>
-
+	</ol>
 
 	<h3> Procedure </h3>
 	<h4> Cosmic ray rejection  </h2>
