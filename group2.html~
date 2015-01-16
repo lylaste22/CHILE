@@ -83,7 +83,7 @@
 	<h3>Asteroid detection</h3>
 	<p>One subclass of variable objects that are important to separate are the periodic ones. Although there are other variable stellar objects that also could be interesting to identify. With that idea, we developed a classifier that can associate probabilities of belong to every of the following classes:</p>
          <center>
-          <img class="" src="images/a02.png" width="85%" height="85%"/>
+          <img class="" src="images/a02.gif" width="85%" height="85%"/>
         </center>
         </div>  
 	</div>    
