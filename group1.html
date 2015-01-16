@@ -118,13 +118,77 @@ objlim=1 (contrast limit between cosmic rays and an underlying object) </code></
 	
 	
   
-	<h4> Object Identification  </h2>
+	<h4> Photometry: Using Sextractor (SE) </h2>
+	
+	<p>SExtractor is a widely known software created by E. Bertin capable of detecting objects, extracting their flux (or magnitude) using a variety of different approaches and providing a rough classification of the identified objects using a star/non-star criteria (CLASS_STAR parameter; however, for faint objects, the confidence of classification is not very high).</p> 
+		
+	<p>In order to perform this task, SExtractor requires as input some paramaters given in every image as meta-data (CCD's gain, saturation, read noise, pixel scale and [stellar] FWHM), photometric zeropoint obtained (as a better calibration of the instrumental magnitude), in our particular case for DECam photometric calibration (http://soartelescope.org/noao/content/DECam-Photometric-Calibration) per CCD, and the filter that we are going to use for modeling a PSF according to the FWHM. </p>
+	
+	<p>The most important tasks in the workflow that SExtractor implements are the following:   </p>
+	
+	<ol>
+		<li> <b>Background estimation:</b> </li>
+		<p>SExtractor uses the parameter BACK_SIZE for estimating the background of the image as well as the RMS noise in that background. In our case, we use the default parameter given as 64 pixels because the average size of our objects in pixels is smaller than this value (in the worst case, it can be changed easily). The mean and the sigma of the background estimation are crucial for detection tasks.</p>
+		
+		<li><b>Additional Filtering:</b></li>
+		Before the detection, we apply a filter for smoothing the image to increase the signal-to-noise ratio and therefore helping to detect fainter objects. The decision of using a filter was driven by the fact that our images are not extremely crowded. Typically, the recommendation for filtering is to use the Sextractor 'canonical' filters; gaussian, tophat, mexhat, block (especially the gaussian ones because they are adequate to a star's PSF) and choose the one which has a similar FWHM compared to the images. 
+		</p>
+		
+		<p>The first approach used to create a pipeline was to implement the idea explained above using Sextractor's gaussian filters (commented code in testfits.py). In the final iteration of our implementation we 'create' our own gaussians filters according to the precise FWHM of the images using a Python implementation of a MATLAB's  fspecial function for creating gaussian filters, obtained from:</p>
+<pre><code>import numpy as np
+
+def matlab_style_gauss2D(shape=(3,3),sigma=0.5):
+    """
+    2D gaussian mask - should give the same result as MATLAB's
+    fspecial('gaussian',[shape],[sigma])
+    """
+    m,n = [(ss-1.)/2. for ss in shape]
+    y,x = np.ogrid[-m:m+1,-n:n+1]
+    h = np.exp( -(x*x + y*y) / (2.*sigma*sigma) )
+    h[ h < np.finfo(h.dtype).eps*h.max() ] = 0
+    sumh = h.sum()
+    if sumh != 0:
+        h /= sumh
+    return h</code></pre>
+		
+		<p>Even though our matrices don't match perfectly with the SExtractor output (component by component), they are close and a direct question to E. Bertin could help us in improving the calculation of the matrices.  </p>
+		
+		
+		<li><b>Detection + Deblending:</b></li>
+		
+		<p>SExtractor uses thresholding for detecting objects that satisfy the following requirements:</p>
+		
+		<ul>
+			<li>All the pixels are above a certain value called DETECT_THRESH (in our case, it was set up as 1.5 sigmas above the mean background value).</li>
+			<li>All these pixels are adjacent to each other.</li>
+			<li>There are more than the minimum a number of pixels, specified with the value of DETECT_MINAREA, which in our case is 5 pixels.</li>
+		</ul>
+		
+		<p>An important task that SExtractor does is what we call deblending; it means SE decides whether or not a group of adjacent pixels above the threshold is a single object or not, depending on the value of DEBLEND_NTRESH, which is a very sensitive parameter and we didn't 'toy' with it enough.</p>
+		
+		<li><b>Photometry:</b></li>
+		<p>We didn't pick up a unique way of measuring the flux (ISO, ISOCORR, BEST, AUTO), with the additional value of photometric zeropoint for calibrating the magnitudes (even though at the end we 'skipped' the extinction and color term); it's up to Team 3 choosing the best one.</p>
+		
+		
+	</ol>
+	
+	<p>Improvements</p>
+	<ul>
+		<li>'Toy' with more values for thresholding and deblending and test them for improving the detection of faint and nearby objects, respectively.</li>
+		<li>Gaussian filters: we need to quantify the power of this tool and eventually 'create' the best PSF model for our images (replace the code of MATLAB).</li>
+		<li>Mailing E. Bertin for details in the calculation of magnitudes and gaussian filters.</li>
+		<li>Use a full calibration for the magnitudes (even if in our case we are going to 'add' some constants).</li>
+
+	</ul>
 	
 	
-	<h4> Cross-Reference with Virtual Catalogs  </h2>
+	<h4> Cross-Reference with Virtual Observatory Catalogs  </h2>
+    <p>
+STILTS (Starlink Tables Infrastructure Library Tool Set) is a command line interface toolkit that uses the same underlying engine as the graphical user interface program TOPCAT.  Using STILTS, we cross-reference our catalogs extracted from images with Virtual Observatory’s online catalog.   As STILTS accepts catalogs in VOTable format, we configured SExtractor to output catalogs in VOTables.  Online catalogs, such as 2MASS, then were queried to return additional information, such as measurements of different color filters, about the objects in the catalog.  The retrieved information is intended to help classify astronomical objects in addition to the fields extracted by SExtractor.
+    </p>
 	
 	<h4> HPC </h4>
-	<p>The NLHPC is aimed to install in Chile a computing capacity that would meet the national scientific demand for high performance computing (HPC).</p>
+	<p>The NLHPC is in place to provide a computing capacity in Chile meeting the national scientific demand for high performance computing (HPC).</p>
 	<p>Leftraru, consist in 128 Nodes HP SL230, an four HP SL250, 2640 cores Intel Ivy Bridge E5-2660V2, 12 Xeon Phi 5110p, 5.4 TB de RAM, conexión Infiniband FDR a 56Gbits/s, 274TB of storage.</p>
 	<p>The pipeline for the group aimed on throwing over 20.000 tasks, one per image, in which the images will go through the process of first removing cosmic rays (with the customized crblaster), then extracting the data an generating the catalogs (with the adjusted SExtractor), and finally generating the virtual observatory catalogs (generated with stilts).</p>
 	<p>The code for Leftraru was writen in slurm, and runs a python script which contains all the sub processes for the images, the slurm code picks an image and runs the python script whith it.</p>
