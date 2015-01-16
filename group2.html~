@@ -112,8 +112,8 @@ To do the classification, we reduced the dimensionality of the data from 24 to 1
 <p>After doing this parametrization, we runned DBSCAN on top of a dataset of four dimensions in which each point represented a straight line which passes through two observation points. In our new space, high density spots would represent places where there are many straight lines coinciding, therefore we would find colinearity between several point in the original space. </p>
 <center>
 
-<img id="#i1" src="images/super_asteroide.png" width="50%" height="50%"/>
-<img id="#i2" src="images/a02.gif" width="50%" height="50%"/>
+<img id="#i1" src="images/super_asteroide.png" width="45%" height="45%"/>
+<img id="#i2" src="images/a02.gif" width="45%" height="45%"/>
 
         </center>
 <p>This gif on the right correspond to the 12-dotted asteroid at the plot on the left. Given its characteristis, we can ensure that we are seing a TNO</p>
