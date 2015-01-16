@@ -55,13 +55,14 @@
         <div class="col-md-12">
 	
 	<h3>Task Description</h3>
-	<p>The objective of our work was to develop a classifier of different types of stellar objects. The information available about those objects was the radius, the position in the sky in celestial coordinates, and the time series of 16 points (4 each night, 4 nights). We decided to use a decision tree for this purpose, in order to classify from general objects like galaxies or stars  to specific subclasses of variable stars. The decisions include probabilities, so at the end we have a probability of belonging at each terminal class. </p>
-        
+	<p>The objective of our work was to develop a classifier of different types of stellar objects.
+	We counted with 25 features including celestial postition, flux and ellipticity. Our main goal was to discriminate between stars, galaxies, asteroids and artifacts</p>
+        For this purpuse, we first classified between moving and non moving objects using DBSCAN. Then, between the moving object we
         <center>
           <img class="" src="img/group2_flowchart.png" width="70%" height="70%"/>
         </center>
         
-        <h3>Star/galaxy clasifier</h3>
+        <h3>Moving/non-moving object clasifier</h3>
         <p>The information used for this classifier is only the radius information. Stars should be point sources, with a radius of less than a certain number of pixels and without big variations from one epoch to another.</p>
         
         
