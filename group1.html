@@ -167,12 +167,12 @@ def matlab_style_gauss2D(shape=(3,3),sigma=0.5):
 		<p>An important task that SExtractor does is what we call deblending; it means SE decides whether or not a group of adjacent pixels above the threshold is a single object or not, depending on the value of DEBLEND_NTRESH, which is a very sensitive parameter and we didn't 'toy' with it enough.</p>
 		
 		<li><b>Photometry:</b></li>
-		<p>We didn't pick up a unique way of measuring the flux (ISO, ISOCORR, BEST, AUTO), with the additional value of photometric zeropoint for calibrating the magnitudes (even though at the end we 'skipped' the extinction and color term); it's up to Team 3 choosing the best one.</p>
+		<p>We didn't pick up a unique way of measuring the flux (ISO, ISOCORR, BEST, AUTO), with the additional value of photometric zeropoint for calibrating the magnitudes (even though at the end we 'skipped' the extinction and color term); it's up to Team 3 to choose the best one.</p>
 		
 		
 	</ol>
 	
-	<p>Future possible improvements:</p>
+	<p>Possible improvements</p>
 	<ul>
 		<li>Play with more values for thresholding and deblending and test them for improving the detection of faint and nearby objects, respectively.</li>
 		<li>Gaussian filters: we need to quantify the power of this tool and eventually 'create' the best PSF model for our images (replace the code of MATLAB).</li>
