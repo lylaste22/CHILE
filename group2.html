@@ -25,8 +25,15 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="http://latex.codecogs.com/latexit.js"></script>
+	<style>
+#i1 {
+    margin-right: 200px;
+}
 
-
+#i2 {
+    margin-left: 200px;
+}
+</style>
   </head>
 
   <body>
@@ -40,7 +47,7 @@
           <li><a href="group3.html">Group 3</a></li>
           <li><a href="https://github.com/lylaste22/CHILE" target="_blank">Code</a></li>
         </ul>
-        <h3 class="text-muted">CHILE 2014</h3>
+        <h3 class="text-muted">CHILE 2015</h3>
       </div>
 
       <div class="container">
@@ -71,28 +78,48 @@
         <center>
           <img class="" src="images/dbscan_plot.png" width="85%" height="85%"/>
         </center>
+       
         
-        
-        <h3>Stars/Galaxied detection: Active learning</h3>
-        <p></p>
-        
+        <h3>Stars/Galaxied detection</h3>
+        <p>Between all the features SExtractor gives, there is a CLASS_STAR feature that is a value between 0 and 1 which represents how confident is SExtractor to classify this detection as a star. We assumed that we could label as Star every object with a CLASS_STAR value greater than 0.9 and label as Galaxy all the objects with less than 0.1 in this feature. For each cluster, we considered the median of all its members.</p>
+                <p>Between all the features SExtractor gives, there is a CLASS_STAR feature that is a value between 0 and 1 which represents how confident is SExtractor to classify this detection as a star. We assumed that we could label as Star every object with a CLASS_STAR value greater than 0.9 and label as Galaxy all the objects with less than 0.1 in this feature. For this purpuse, we considered the median of its members in each cluster.All the other clusters which its medians where between 0.1 we labeld them as indeterminated</p>
+	<p>After this, we used supervised learing to clasify the indetermined objects based on our labeled set and 24 features given by SExtractor.
+To test this method we splited our labeled set and created a training set from a random 50% of the data of the labeld set and leaving the rest to be part of the testing set. We got an accurracy of 95%.</p>
+<p>
+To do the classification, we reduced the dimensionality of the data from 24 to 10 features using PCA, and then we classified it using Random Forest and Linear Discriminant Analisis. All the data which resulted with the same label with both of the classifiers where labeled either as a star or galaxy, while the rest was discarded and treated as an artifact.
+</p>
 	
-	<p></p>
 	
-	
-	<h3>Asteroid detection</h3>sources
-	<p>Once we already had a dataset of moving-objects, we had to determine when sources of different epochs corresponded to the same astronomical object. To do that, we worked with the asumption that we could aproximate the trajectory of every asteroid to a straight line, and then, search for colinearity between sources. We considered all the lines between pairs of detections using a modified version of Hough Transformation in three dimensions.</p>
-
+	<h3>Asteroid detection</h3>
+	<p>Once we already had a dataset of moving-objects, we had to determine when sources of different epochs corresponded to the same astronomical object. To do that, we worked with the asumption that we could aproximate the trajectory of every asteroid to a straight line, and then, search for colinearity between sources. We considered all the lines between pairs of detections using a modified version of Hough Transformation in three dimensions, using the following ecuations</p>
+	<center>
 	<div lang="latex">
-	arctan(\frac{y_1 - y_2)}{x_1 - x_2})
+	\theta = arctan\left(\frac{y_1 - y_2}{x_1 - x_2}\right)
 	</div>
-         <center>
-          <img class="" src="images/a02.gif" width="85%" height="85%"/>
+	<div lang="latex">
+	x_0 = arctan\left(\frac{x_1 t_2+x_2 t_1}{t_1 - t_2}\right)
+	</div>
+	<div lang="latex">
+	y_0 = arctan\left(\frac{y_1 t_2+t_2 t_1}{t_1 - t_2}\right)
+	</div>
+	<div lang="latex">
+	\nu = arctan\left(\frac{y_1 - y_2}{x_1 - x_2}\right)
+	</div>
+	</center>
+
+        
+	
+<p>After doing this parametrization, we runned DBSCAN on top of a dataset of four dimensions in which each point represented a straight line which passes through two observation points. In our new space, high density spots would represent places where there are many straight lines coinciding, therefore we would find colinearity between several point in the original space. </p>
+<center>
+
+<img id="#i1" src="images/super_asteroide.png" width="45%" height="45%"/>
+<img id="#i2" src="images/a02.gif" width="45%" height="45%"/>
+
         </center>
-        </div>  
-	</div>    
-	<div class="footer">
-        <p><b>Group 2:</b> Pablo Huentelemu, Josefina Michea, Lucas Valenzuela, Xufei Wang  </p>
+<p>This gif on the right correspond to the 12-dotted asteroid at the plot on the left. Given its characteristis, we can ensure that we are seing a TNO</p>
+   </div>  
+</div> 
+<div class="footer"><b>Group 2:</b> Pablo Huentelemu, Josefina Michea, Lucas Valenzuela, Xufei Wang  </p>
       </div>
 
     </div> <!-- /container -->
