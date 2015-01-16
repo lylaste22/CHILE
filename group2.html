@@ -56,8 +56,11 @@
 	
 	<h3>Task Description</h3>
 	<p>The objective of our work was to develop a classifier of different types of stellar objects.
-	We counted with 25 features including celestial postition, flux and ellipticity. Our main goal was to discriminate between stars, galaxies, asteroids and artifacts</p>
-        For this purpuse, we first classified between moving and non moving objects using DBSCAN. Then, between the moving object we
+	We counted with 25 features including celestial postition, flux and ellipticity.
+	Our main goal was to discriminate between stars, galaxies, asteroids and artifacts</p>
+        For this purpuse, we first distinguished between moving and non moving objects using DBSCAN.
+        Then, we classiffied non-moving objects as stars or artifacts. Finally within our moving objetcs set, we searched for asteroids, using Hough Transform and DBSCAN. This way, we
+        found sources of different epochs which belonged to the same astronomical object.
         <center>
           <img class="" src="img/group2_flowchart.png" width="70%" height="70%"/>
         </center>
