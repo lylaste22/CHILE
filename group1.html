@@ -160,7 +160,10 @@ objlim=1 (contrast limit between cosmic rays and an underlying object) </code></
 	
 	
 	
-	<h4> Cross-Reference with Virtual Catalogs  </h2>
+	<h4> Cross-Reference with Virtual Observatory Catalogs  </h2>
+    <p>
+STILTS (Starlink Tables Infrastructure Library Tool Set) is a command line interface toolkit that uses the same underlying engine as the graphical user interface program TOPCAT.  Using STILTS, we cross-reference our catalogs extracted from images with Virtual Observatory’s online catalog.   As STILTS accepts catalogs in VOTable format, we configured SExtractor to output catalogs in VOTables.  Online catalogs, such as 2MASS, then were queried to return additional information, such as measurements of different color filters, about the objects in the catalog.  The retrieved information is intended to help classify astronomical objects in addition to the fields extracted by SExtractor.
+    </p>
 	
 	<h4> HPC </h4>
 	<p>The NLHPC is aimed to install in Chile a computing capacity that would meet the national scientific demand for high performance computing (HPC).</p>
