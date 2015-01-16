@@ -62,14 +62,12 @@
         Then, we classiffied non-moving objects as stars or artifacts. Finally within our moving objetcs set, we searched for asteroids, using Hough Transform and DBSCAN. This way, we
         found sources of different epochs which belonged to the same astronomical object.
         <center>
-          <img class="" src="img/group2_flowchart.png" width="70%" height="70%"/>
+          <img class="" src="images/group2_flowchart.png" width="70%" height="70%"/>
         </center>
         
         <h3>Moving/non-moving object clasifier</h3>
         <p>To do the classification between moving and non-moving objects, we runned DBSCAN clustering algorith on top a dataset which included the detections of all 20 epochs. DBSCAN is a density-based clustering algorith which puts in the same cluster two elements if they have a distance less than a scpecific threshold, and it doesn't need the number of cluster as a parameter. In this case, each cluster represented a non-moving astronomical objects and non clustered objects represented moving object than can either be asteroids or artifacts. We used 0.003 degrees as the distance threshold parameter for DBSCAN and only considered clusters with at least three samples. </p>
 
-
-<p>With this, we </p>
         <center>
           <img class="" src="images/dbscan_plot.png" width="85%" height="85%"/>
         </center>
@@ -81,9 +79,6 @@
 	
 	<p></p>
 	
-	<center>
-	<img class="" src="img/allvarcand_mod.png" width="70%" height="70%">
-	</center>
 	
 	<h3>Asteroid detection</h3>
 	<p>One subclass of variable objects that are important to separate are the periodic ones. Although there are other variable stellar objects that also could be interesting to identify. With that idea, we developed a classifier that can associate probabilities of belong to every of the following classes:</p>
