@@ -121,7 +121,7 @@ To do the classification, we reduced the dimensionality of the data from 24 to 1
 <img id="#i2" src="images/movie.gif" width="100%" height="100%"/>
 
         </center>
-<p>This gif on the corresponds to the 12-dotted asteroid at the plot on above. Its is a very slow object with a speed of 3.34 arcsec/hour. Given its characteristis, we can ensure that it is a TNO.</p>
+<p>This gif on the corresponds to the asteroid on the left at the plot on above. Its is a very slow object with a speed of 3.34 arcsec/hour. Given its characteristis, we can be sure that it is a TNO.</p>
    </div>  
 </div> 
 <div class="footer"><b>Group 2:</b> Pablo Huentelemu, Josefina Michea, Lucas Valenzuela, Xufei Wang  </p>
