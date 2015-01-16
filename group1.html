@@ -118,7 +118,7 @@ objlim=1 (contrast limit between cosmic rays and an underlying object) </code></
 	
 	
   
-	<h4> Photometry: Using Sextractor (SE) </h2>
+	<h4> Photometry: Using SExtractor (SE) </h2>
 	
 	<p>SExtractor is a widely known software created by E. Bertin capable of detecting objects, extracting their flux (or magnitude) using a variety of different approaches and providing a rough classification of the identified objects using a star/non-star criteria (CLASS_STAR parameter; however, for faint objects, the confidence of classification is not very high).</p> 
 		
@@ -131,10 +131,10 @@ objlim=1 (contrast limit between cosmic rays and an underlying object) </code></
 		<p>SExtractor uses the parameter BACK_SIZE for estimating the background of the image as well as the RMS noise in that background. In our case, we use the default parameter given as 64 pixels because the average size of our objects in pixels is smaller than this value (in the worst case, it can be changed easily). The mean and the sigma of the background estimation are crucial for detection tasks.</p>
 		
 		<li><b>Additional Filtering:</b></li>
-		Before the detection, we apply a filter for smoothing the image to increase the signal-to-noise ratio and therefore helping to detect fainter objects. The decision of using a filter was driven by the fact that our images are not extremely crowded. Typically, the recommendation for filtering is to use the Sextractor 'canonical' filters; gaussian, tophat, mexhat, block (especially the gaussian ones because they are adequate to a star's PSF) and choose the one which has a similar FWHM compared to the images. 
+		Before the detection, we apply a filter for smoothing the image to increase the signal-to-noise ratio and therefore helping to detect fainter objects. The decision of using a filter was driven by the fact that our images are not extremely crowded. Typically, the recommendation for filtering is to use the SExtractor 'canonical' filters; gaussian, tophat, mexhat, block (especially the gaussian ones because they are adequate to a star's PSF) and choose the one which has a similar FWHM compared to the images. 
 		</p>
 		
-		<p>The first approach used to create a pipeline was to implement the idea explained above using Sextractor's gaussian filters (commented code in testfits.py). In the final iteration of our implementation we 'create' our own gaussians filters according to the precise FWHM of the images using a Python implementation of a MATLAB's  fspecial function for creating gaussian filters, obtained from:</p>
+		<p>The first approach used to create a pipeline was to implement the idea explained above using SExtractor's gaussian filters (commented code in testfits.py). In the final iteration of our implementation we 'create' our own gaussians filters according to the precise FWHM of the images using a Python implementation of a MATLAB's  fspecial function for creating gaussian filters, obtained from:</p>
 <pre><code>import numpy as np
 
 def matlab_style_gauss2D(shape=(3,3),sigma=0.5):
