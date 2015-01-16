@@ -101,11 +101,17 @@
 	
 	<p>The image below shows an illustration of the original image including cosmic rays and their subsequent rejection using the cosmics.py module:</p>
 	
+	<center>
+        	<img class="" src="images/pygif.gif" style="width:device-width;max-width:100%;margin:auto;display:inline"/>
+        </center>
+	
 	<p>Although the cosmics.py module accomplishes the cosmic ray defect removal very well for a single image, it does not work well for the 20K images available for processing due to time performance. CRBLASTER is an alternative implementation of the L.A.COSMIC algorithm written in the C language that employs an embarrassingly-parallel algorithm using the high-performance computing industry standard Message Passing Interface (MPI) library. As such, it is ideally suited to being implemented in a parallel-processing image-analysis application. </p>
 	
 	<p>The original package for CRBLASTER has hard-coded parameters including noise and gain. To obtain better results, we want to use specific parameter values obtained from the image meta-data. To achieve this, we patched the CRBLASTER application to accept parameters. The results for this customized version of the cosmic ray removal application obtained are equally effective as the python cosmics module as seen in the animation below:</p>
 	
-	
+	<center>
+        	<img class="" src="images/crgif.gif" style="width:device-width;max-width:100%;margin:auto;display:inline"/>
+        </center>
 	
 	
 	
