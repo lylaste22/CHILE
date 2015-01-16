@@ -25,18 +25,6 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="http://latex.codecogs.com/latexit.js"></script>
-	<style>
-#i1 {
-    margin-right: 200px;
-}
-
-#i2 {
-    margin-left: 200px;
-}
-table, th, td {
-   padding: 20px;
-}
-</style>
   </head>
 
   <body>
@@ -75,7 +63,7 @@ table, th, td {
           <img class="" src="images/group2_flowchart.png" width="70%" height="70%"/>
         </center>
         
-        <h3>Moving/non-moving object classifier</h3>
+        <h3>Moving/Non-moving object classifier</h3>
         <p>To do the classification between moving and non-moving objects, we ran the DBSCAN clustering algorithm on a dataset which included the detections on all 20 epochs. DBSCAN is a density-based clustering algorithm which puts in the same cluster two elements if they have a distance less than a specific threshold, and it doesn't need the number of clusters as a parameter. In this case, each cluster represented a non-moving astronomical object, while non clustered objects represented a moving object than can either be an asteroid or an artifact. We used 0.003 degrees (about 1.08 arseconds) as the distance threshold parameter for DBSCAN and only considered clusters with at least three samples. </p>
 
         <center>
@@ -83,7 +71,7 @@ table, th, td {
         </center>
        
         
-        <h3>Stars/Galaxied detection</h3>
+        <h3>Stars and Galaxies detection</h3>
         <p>Between all the features SExtractor gives, there is a CLASS_STAR feature that is a value between 0 and 1 which represents how confident is SExtractor to classify this detection as a star. We assumed that we could label as Star every object with a CLASS_STAR value greater than 0.9 and label as Galaxy all the objects with less than 0.1 in this feature. For each cluster, we considered the median of all its members.</p>
                 <p>Between all the features SExtractor gives, there is a CLASS_STAR feature that is a value between 0 and 1 which represents how confident is SExtractor to classify this detection as a star. We assumed that we could label as Star every object with a CLASS_STAR value greater than 0.9 and label as Galaxy all the objects with less than 0.1 in this feature. For this purpuse, we considered the median of its members in each cluster.All the other clusters which its medians where between 0.1 we labeld them as indeterminated</p>
 	<p>After this, we used supervised learing to clasify the indetermined objects based on our labeled set and 24 features given by SExtractor.
@@ -94,7 +82,7 @@ To do the classification, we reduced the dimensionality of the data from 24 to 1
 	
 	
 	<h3>Asteroid detection</h3>
-	<p>Once we already had a dataset of moving-objects, we had to determine when sources of different epochs corresponded to the same astronomical object. To do that, we worked with the asumption that we could aproximate the trajectory of every asteroid to a straight line, and then, search for colinearity between sources. We considered all the lines between pairs of detections using a modified version of Hough Transformation in three dimensions, using the following ecuations</p>
+	<p>Once we already had a dataset of moving-objects, we had to determine when sources of different epochs corresponded to the same astronomical object. To do that, we worked with the asumption that we could aproximate the trajectory of every asteroid to a straight line, and then, search for colinearity between sources. We considered all the lines between pairs of detections using a modified version of Hough Transformation in three dimensions, using the following ecuations:</p>
 	<center>
 	<table>
 	<tr>
@@ -129,11 +117,11 @@ To do the classification, we reduced the dimensionality of the data from 24 to 1
 <p>After doing this parametrization, we runned DBSCAN on top of a dataset of four dimensions in which each point represented a straight line which passes through two observation points. In our new space, high density spots would represent places where there are many straight lines coinciding, therefore we would find colinearity between several point in the original space. </p>
 <center>
 
-<img id="#i1" src="images/super_asteroide.png" width="45%" height="45%"/>
-<img id="#i2" src="images/a02.gif" width="45%" height="45%"/>
+<img id="#i1" src="images/super_asteroide.png" width="60%" height="60%"/>
+<img id="#i2" src="images/movie.gif" width="100%" height="100%"/>
 
         </center>
-<p>This gif on the right correspond to the 12-dotted asteroid at the plot on the left. Given its characteristis, we can ensure that we are seeing a TNO</p>
+<p>This gif on the corresponds to the 12-dotted asteroid at the plot on above. Its is a very slow object with a speed of 3.34 arcsec/hour. Given its characteristis, we can ensure that it is a TNO.</p>
    </div>  
 </div> 
 <div class="footer"><b>Group 2:</b> Pablo Huentelemu, Josefina Michea, Lucas Valenzuela, Xufei Wang  </p>

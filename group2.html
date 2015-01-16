@@ -25,18 +25,6 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="http://latex.codecogs.com/latexit.js"></script>
-	<style>
-#i1 {
-    margin-right: 200px;
-}
-
-#i2 {
-    margin-left: 200px;
-}
-table, th, td {
-   padding: 20px;
-}
-</style>
   </head>
 
   <body>
@@ -94,7 +82,7 @@ To do the classification, we reduced the dimensionality of the data from 24 to 1
 	
 	
 	<h3>Asteroid detection</h3>
-	<p>Once we already had a dataset of moving-objects, we had to determine when sources of different epochs corresponded to the same astronomical object. To do that, we worked with the asumption that we could aproximate the trajectory of every asteroid to a straight line, and then, search for colinearity between sources. We considered all the lines between pairs of detections using a modified version of Hough Transformation in three dimensions, using the following ecuations</p>
+	<p>Once we already had a dataset of moving-objects, we had to determine when sources of different epochs corresponded to the same astronomical object. To do that, we worked with the asumption that we could aproximate the trajectory of every asteroid to a straight line, and then, search for colinearity between sources. We considered all the lines between pairs of detections using a modified version of Hough Transformation in three dimensions, using the following ecuations:</p>
 	<center>
 	<table>
 	<tr>
@@ -129,11 +117,11 @@ To do the classification, we reduced the dimensionality of the data from 24 to 1
 <p>After doing this parametrization, we runned DBSCAN on top of a dataset of four dimensions in which each point represented a straight line which passes through two observation points. In our new space, high density spots would represent places where there are many straight lines coinciding, therefore we would find colinearity between several point in the original space. </p>
 <center>
 
-<img id="#i1" src="images/super_asteroide.png" width="45%" height="45%"/>
-<img id="#i2" src="images/a02.gif" width="45%" height="45%"/>
+<img id="#i1" src="images/super_asteroide.png" width="60%" height="60%"/>
+<img id="#i2" src="images/movie.gif" width="100%" height="100%"/>
 
         </center>
-<p>This gif on the right correspond to the 12-dotted asteroid at the plot on the left. Given its characteristis, we can ensure that we are seeing a TNO</p>
+<p>This gif on the corresponds to the asteroid on the left at the plot on above. Its is a very slow object with a speed of 3.34 arcsec/hour. Given its characteristis, we can be sure that it is a TNO.</p>
    </div>  
 </div> 
 <div class="footer"><b>Group 2:</b> Pablo Huentelemu, Josefina Michea, Lucas Valenzuela, Xufei Wang  </p>
