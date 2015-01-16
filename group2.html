@@ -80,8 +80,12 @@
 	<p></p>
 	
 	
-	<h3>Asteroid detection</h3>
-	<p>One subclass of variable objects that are important to separate are the periodic ones. Although there are other variable stellar objects that also could be interesting to identify. With that idea, we developed a classifier that can associate probabilities of belong to every of the following classes:</p>
+	<h3>Asteroid detection</h3>sources
+	<p>Once we already had a dataset of moving-objects, we had to determine when sources of different epochs corresponded to the same astronomical object. To do that, we worked with the asumption that we could aproximate the trajectory of every asteroid to a straight line, and then, search for colinearity between sources. We considered all the lines between pairs of detections using a modified version of Hough Transformation in three dimensions.</p>
+
+	<div lang="latex">
+	arctan(\frac{y_1 - y_2)}{x_1 - x_2})
+	</div>
          <center>
           <img class="" src="images/a02.gif" width="85%" height="85%"/>
         </center>
