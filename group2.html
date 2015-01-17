@@ -58,12 +58,9 @@ table, th, td {
         <div class="col-md-12">
 	
 	<h3>Task Description</h3>
-	<p>The objective of our work was to develop a classifier of different types of astronomical objects.
-	To achieve this goal, we count with 25 features including celestial position, flux and ellipticity.
-	Our main goal was to discriminate between stars, galaxies, asteroids and artifacts</p>
-        For this purpose, we first distinguished between moving and non moving objects using DBSCAN.
-        Then, we classified non-moving objects as stars, galaxies or artifacts. Finally, within our moving objects set, we searched for asteroids, using the Hough Transform and DBSCAN. This way, we
-        found sources in different epochs which belonged to the same astronomical object.
+	<p>The objective of our work was to develop a classifier of different types of astronomical objects present in the Dark Energy Survey (DES) data.  We possess a catalog --developed by *group 1*-- with all the astronomical objects and information on their relevant (about 25) features; including their celestial position, apparent magnitude and ellipticity. Moreover, as each DES field has been observed about 20 times (4 times a night for 5 consecutive days), we have time as an additional dimension of the dataset.  Given the characteristics of the data, our main goal was being able to discriminate between stars, galaxies, asteroids and artifacts.</p>
+        For this purpose, we first distinguished between moving and non-moving objects using DBSCAN, a clustering algorithm, by stacking all the epochs onto one plane and searching for clusters.  Then, we classified non-moving objects as stars, galaxies or artifacts using a machine learning approach.  Finally, within our moving objects set, we searched for asteroids by first implementing a modified version of the Hough transform to link sources between epochs and then using DBSCAN to establish if they could possibly be the same object or not. This way, we were able to identify real astronomical objects that were present in different epochs, but that changed their position in time, as the same source.
+
         <center>
           <img class="" src="images/group2_flowchart.png" width="70%" height="70%"/>
         </center>
