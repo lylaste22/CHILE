@@ -86,7 +86,9 @@ table, th, td {
 	
 	
 	<h3>Asteroid Identification</h3>
-	<p>Once we already had a dataset of moving-objects, we had to determine when sources of different epochs corresponded to the same astronomical object. To do that, we worked with the asumption that we could aproximate the trajectory of every asteroid to a straight line, and then, search for colinearity between sources. We considered all the lines between pairs of detections using a modified version of Hough Transformation in three dimensions, using the following ecuations:</p>
+	
+	<p>Once we have a dataset of moving-objects, we need to determine when the sources present in different epochs correspond to the same astronomical object.  To achieve this, we worked under the assumption that the trajectory of every asteroid could be approximated to a straight line, and then searched for collinearity between sources.  First, we considered all the possible lines that could be established between pairs of detections that occured on different epochs.  For this, we implement a modified version of the Hough transformation in three dimensions (right ascension, declination and time) that gives us a parametrization of the pairs in four dimensions (right ascension of the object in the t=0 plane, declination of the object in the t=0 plane, an angle, and its velocity).  This corresponds to the following equations:</p>
+
 	<center>
 	<table>
 	<tr>
@@ -109,7 +111,7 @@ table, th, td {
 	</td>
 	<td>
 	<div lang="latex">
-	\nu = arctan\left(\frac{y_1 - y_2}{x_1 - x_2}\right)
+	V = arctan\left(\frac{y_1 - y_2}{x_1 - x_2}\right)
 	</div>
 	</td>
 	</tr>
