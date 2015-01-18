@@ -59,6 +59,7 @@ table, th, td {
 	
 	<h3>Task Description</h3>
 	<p>The objective of our work was to develop a classifier of different types of astronomical objects present in the Dark Energy Survey (DES) data.  We possess a catalog –developed by <i>Group 1</i>– with all the astronomical objects and information on their relevant (about 25) features; including their celestial position, apparent magnitude and ellipticity. Moreover, as each DES field has been observed about 20 times (4 times a night for 5 consecutive days), we have time as an additional dimension of the dataset.  Given the characteristics of the data, our main goal was being able to discriminate between stars, galaxies, asteroids and artifacts.</p>
+        
         <p>For this purpose, we first distinguished between moving and non-moving objects using DBSCAN, a clustering algorithm, by stacking all the epochs onto one plane and searching for clusters.  Then, we classified non-moving objects as stars, galaxies or artifacts using a machine learning approach.  Finally, within our moving objects set, we searched for asteroids by first implementing a modified version of the Hough transform to link sources between epochs and then using DBSCAN to establish if they could possibly be the same object or not. This way, we were able to identify real astronomical objects that were present in different epochs, but that changed their position in time, as a same source.</p>
 
         <center>
@@ -67,6 +68,7 @@ table, th, td {
         
         <h3>Moving/Non-moving Object Classifier</h3>
         <p>To do the classification between moving and non-moving objects, we ran the DBSCAN clustering algorithm on a dataset that included the 20 epochs of detections.  DBSCAN is a density-based clustering algorithm which places in the same cluster two elements if they have a distance that is less than a specific threshold, and it doesn't need the number of clusters as a parameter. Thus, by stacking all 20 epochs onto one plane, each cluster represented a non-moving astronomical object, while non-clustered objects represented a moving object that could either be an asteroid or an artifact present on the original images. We established 0.003 degrees (about 1.08 arcseconds) as the distance threshold parameter for DBSCAN, and only considered clusters that were constituted by at least 3 members.</p>
+        
         <p>An example of running DBSCAN in a subset of the data can be seen below, where the x-axis stands for right ascension and the y-axis for declination –both in degrees–.  Colored dots represent non-moving objects (the zoomed-in area shows that they are in fact clusterized dots), while gray dots represent moving objects.</p>
 
         <center>
@@ -75,16 +77,15 @@ table, th, td {
        
         
         <h3>Star and Galaxy Classification</h3>
-        <p>Between all the features SExtractor gives, there is a CLASS_STAR feature that is a value between 0 and 1 which represents how confident is SExtractor to classify this detection as a star. We assumed that we could label as Star every object with a CLASS_STAR value greater than 0.9 and label as Galaxy all the objects with less than 0.1 in this feature. For each cluster, we considered the median of all its members.</p>
-                <p>Between all the features SExtractor gives, there is a CLASS_STAR feature that is a value between 0 and 1 which represents how confident is SExtractor to classify this detection as a star. We assumed that we could label as Star every object with a CLASS_STAR value greater than 0.9 and label as Galaxy all the objects with less than 0.1 in this feature. For this purpuse, we considered the median of its members in each cluster.All the other clusters which its medians where between 0.1 we labeld them as indeterminated</p>
-	<p>After this, we used supervised learing to clasify the indetermined objects based on our labeled set and 24 features given by SExtractor.
-To test this method we splited our labeled set and created a training set from a random 50% of the data of the labeld set and leaving the rest to be part of the testing set. We got an accurracy of 95%.</p>
-<p>
-To do the classification, we reduced the dimensionality of the data from 24 to 10 features using PCA, and then we classified it using Random Forest and Linear Discriminant Analisis. All the data which resulted with the same label with both of the classifiers where labeled either as a star or galaxy, while the rest was discarded and treated as an artifact.
-</p>
+        <p>To be able to distinguish between stars and galaxies as efficiently as possible, we first start by considering a particular feature that Source Extractor assigns to each of its detections.  This parameter, <i>CLASS_STAR</i>, represents how confident SExtractor is in classifying each object as a star based on its own Neural Network algorithm.  <i>CLASS_STAR</i> can take a value between 0 and 1, where 0 correponds to galaxy (or, more precisely, non-star) and 1 corresponds to star.  Thus, we assumed we could label –with relatively high confidence– as <b>'star'</b> every object with a <i>CLASS_STAR</i> value greater than 0.9, and label as a <b>'galaxy'</b> the objects with a value smaller than 0.1.  For each non-moving object cluster, we considered the median value of its constituting members.  If the median <i>CLASS_STAR</i> value of an object fell between 0.1 and 0.9, we labeled them as <b>'undetermined'</b>.</p>
+        <p>As the next step, we used supervised learning to reclassify the undetermined objects as either stars or galaxies, basing ourselves on our labeled set and the additional 24 features provided by SExtractor.  To test the quality of this approach, we split our labeled dataset in two: a random 50% of it was assigned to be the training set, while the remaining 50% was appointed to the testing set.  We obtained around 95% accuracy during several repetitions of this experiment, which we consider to be satisfactory.</p>
+        
+        <p>To do the classification, we first reduced the dimensionality of the dataset from 24 to 10 features using Principal Component Analysis (PCA) to recover the most relevant information.  Afterwards, we classified the data through two different approaches: Random Forests and Linear Discriminant Analysis (LDA).  All the objects which ended up having coinciding labels (either star <i>or</i> galaxy) after passing through both of the classifiers were finally taken into account and saved, while objects with non-coinciding labels were discarded.  As part of our role as <i>Group 2</i> in the overall work-flow, we provide a catalog of all the objects we classified as stars to <i>Group 3</i>.</p>
+        
+        <p>hi</p>
 	
 	
-	<h3>Asteroid Detection</h3>
+	<h3>Asteroid Identification</h3>
 	<p>Once we already had a dataset of moving-objects, we had to determine when sources of different epochs corresponded to the same astronomical object. To do that, we worked with the asumption that we could aproximate the trajectory of every asteroid to a straight line, and then, search for colinearity between sources. We considered all the lines between pairs of detections using a modified version of Hough Transformation in three dimensions, using the following ecuations:</p>
 	<center>
 	<table>
