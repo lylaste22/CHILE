@@ -67,14 +67,14 @@ table, th, td {
         
         <h3>Moving/Non-moving Object Classifier</h3>
         <p>To do the classification between moving and non-moving objects, we ran the DBSCAN clustering algorithm on a dataset that included the 20 epochs of detections.  DBSCAN is a density-based clustering algorithm which places in the same cluster two elements if they have a distance that is less than a specific threshold, and it doesn't need the number of clusters as a parameter. Thus, by stacking all 20 epochs onto one plane, each cluster represented a non-moving astronomical object, while non-clustered objects represented a moving object that could either be an asteroid or an artifact present on the original images. We established 0.003 degrees (about 1.08 arcseconds) as the distance threshold parameter for DBSCAN, and only considered clusters that were constituted by at least 3 members.</p>
-        <p>An example of running DBSCAN in a subset of the data can be seen below.  Colored dots represent non-moving objects (the zoomed-in area shows that they are in fact clusterized dots), while gray dots represent moving objects.</p>
+        <p>An example of running DBSCAN in a subset of the data can be seen below, where the x-axis stands for right ascension and the y-axis for declination –both in degrees–.  Colored dots represent non-moving objects (the zoomed-in area shows that they are in fact clusterized dots), while gray dots represent moving objects.</p>
 
         <center>
           <img class="" src="images/dbscan_plot.png" width="85%" height="85%"/>
         </center>
        
         
-        <h3>Star and Galaxy Detections</h3>
+        <h3>Star and Galaxy Classification</h3>
         <p>Between all the features SExtractor gives, there is a CLASS_STAR feature that is a value between 0 and 1 which represents how confident is SExtractor to classify this detection as a star. We assumed that we could label as Star every object with a CLASS_STAR value greater than 0.9 and label as Galaxy all the objects with less than 0.1 in this feature. For each cluster, we considered the median of all its members.</p>
                 <p>Between all the features SExtractor gives, there is a CLASS_STAR feature that is a value between 0 and 1 which represents how confident is SExtractor to classify this detection as a star. We assumed that we could label as Star every object with a CLASS_STAR value greater than 0.9 and label as Galaxy all the objects with less than 0.1 in this feature. For this purpuse, we considered the median of its members in each cluster.All the other clusters which its medians where between 0.1 we labeld them as indeterminated</p>
 	<p>After this, we used supervised learing to clasify the indetermined objects based on our labeled set and 24 features given by SExtractor.
