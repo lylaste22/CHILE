@@ -82,7 +82,7 @@ table, th, td {
         
         <p>To do the classification, we first reduced the dimensionality of the dataset from 24 to 10 features using Principal Component Analysis (PCA) to recover the most relevant information.  Afterwards, we classified the data through two different approaches: Random Forests and Linear Discriminant Analysis (LDA).  All the objects which ended up having coinciding labels (either star <i>or</i> galaxy) after passing through both of the classifiers were finally taken into account and saved, while objects with non-coinciding labels were discarded.  As part of our role as <i>Group 2</i> in the overall work-flow, we provide a catalog of all the objects we classified as stars to <i>Group 3</i>.</p>
         
-        <p>hi</p>
+        <p>We would like to note that we intended to include active learning in our classification method, but did not have enough time to implement it.  The idea consists in that the output labels (star/galaxy/undetermined) of each object could have been re-evaluated based on visual inspection of the source (<i>"does it actually look like a star –or galaxy?–"</i>) combined with cross-checking certain key parameters (e.g., if the object is labeled as a star, <i>does the image's expected full-width at half-maximum (FWHM) of a star-like object coincide with the gaussian FWHM that SExtractor calculated?</i>). Thus, a human-relabeled sample would have been given back to our classifers, which we assume would have improved their accuracy if we iterated this process.</p>
 	
 	
 	<h3>Asteroid Identification</h3>
