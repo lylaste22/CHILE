@@ -87,26 +87,26 @@ table, th, td {
 	
 	<h3>Asteroid Identification</h3>
 	
-	<p>Once we have a dataset of moving-objects, we need to determine when the sources present in different epochs correspond to the same astronomical object.  To achieve this, we worked under the assumption that the trajectory of every asteroid could be approximated to a straight line, and then searched for collinearity between sources.  First, we considered all the possible lines that could be established between pairs of detections that occured on different epochs.  For this, we implement a modified version of the Hough transformation in three dimensions (right ascension, declination and time) that gives us a parametrization of the pairs in four dimensions (right ascension of the object in the t=0 plane, declination of the object in the t=0 plane, an angle, and its velocity).  This corresponds to the following equations:</p>
+	<p>Once we have a dataset of moving-objects, we need to determine when the sources present in different epochs correspond to the same astronomical object.  To achieve this, we worked under the assumption that the trajectory of every asteroid could be approximated to a straight line, and then searched for collinearity between sources.  First, we considered all possible lines that could be established between pairs of detections that occured on different epochs.  For this, we implement a modified version of the Hough transformation in three dimensions (right ascension, declination and time) that gives us a parametrization of the lines formed by pairs in four dimensions (right ascension of the object in the t=0 plane, declination of the object in the t=0 plane, an angle, and its velocity).  This corresponds to the following equations:</p>
 
-	<center>
+        <center>
 	<table>
 	<tr>
 	<td>
 	<div lang="latex">
-	\theta = arctan\left(\frac{y_1 - y_2}{x_1 - x_2}\right)
+	x_0 = arctan\left(\frac{x_1 t_2+x_2 t_1}{t_1 - t_2}\right)
 	</div>
 	</td>
 	<td>
 	<div lang="latex">
-	x_0 = arctan\left(\frac{x_1 t_2+x_2 t_1}{t_1 - t_2}\right)
+	y_0 = arctan\left(\frac{y_1 t_2+t_2 t_1}{t_1 - t_2}\right)
 	</div>
 	</td>
 	</tr>
 	<tr>
 	<td>
 	<div lang="latex">
-	y_0 = arctan\left(\frac{y_1 t_2+t_2 t_1}{t_1 - t_2}\right)
+	\theta = arctan\left(\frac{y_1 - y_2}{x_1 - x_2}\right)
 	</div>
 	</td>
 	<td>
@@ -117,16 +117,15 @@ table, th, td {
 	</tr>
 	</table>
 	</center>
-
-        
 	
-<p>After doing this parametrization, we runned DBSCAN on top of a dataset of four dimensions in which each point represented a straight line which passes through two observation points. In our new space, high density spots would represent places where there are many straight lines coinciding, therefore we would find colinearity between several point in the original space. </p>
+	<p>After doing this four dimensional parametrization, we ran DBSCAN on top of this new dataset in which each point represents a straight line which passes through two source detections.  In this new space, high density spots represent places where there are many straight lines coinciding; therefore, we were able to find collinearity between several sources in the original space.  To filter out as much false positives as possible, we depured the dataset by establishing a minimum threshold of connections between sources (there should be at least 6 or 7 lines) and by imposing that the apparent magnitude of the source could not vary in more than 100% between epochs.</p>
+	
 <center>
 <img id="#i1" src="images/super_asteroide.png" width="60%" height="60%"/>
 <img id="#i2" src="images/movie.gif" width="100%" height="100%"/>
+</center>
 
-        </center>
-<p>The animation above corresponds to snapshots of an asteroid on sequential epochs.  In particular, this moving-object is the one represented on the left of the plot, and as it can be appreciated it was observed in all the five consecutive days of observations with DECam.  On the five days of observations, this asteroid was imaged on the same field and on the same CCD, and we can confirm it is a very slow-moving object with a speed of about 3.34 arcseconds/hour.  Given its characteristics, it is most probable that this asteroid corresponds to a Trans-Neptunian Object (TNO): an object that lies beyond Neptune, the farthest planet from the Sun in the Solar System, and thus could lie more than 30 AUs away.</p>
+	<p>The animation above corresponds to snapshots of an asteroid on sequential epochs.  In particular, this moving-object is the one represented on the left of the plot, and as it can be appreciated it was observed in all the five consecutive days of observations with DECam.  On the five days of observations, this asteroid was imaged on the same field and on the same CCD, and we can confirm it is a very slow-moving object with a speed of about 3.34 arcseconds/hour.  Given its characteristics, it is most probable that this asteroid corresponds to a Trans-Neptunian Object (TNO): an object that lies beyond Neptune, the farthest planet from the Sun in the Solar System, and thus could lie more than 30 AUs away.</p>
    </div>  
 </div> 
 <div class="footer"><b>Group 2:</b> Pablo Huentelemu, Josefina Michea, Lucas Valenzuela, Xufei Wang  </p>
