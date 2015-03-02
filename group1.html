@@ -72,10 +72,10 @@
 	</ul>
 	
         <h3> Aim </h3>
-        <p>Develop a pipeline in the cluster to process the 20K fitz images completing the following tasks:</p>
+        <p>Develop a pipeline in the cluster to process the 20K fits images completing the following tasks:</p>
 	<ol>
-		<li> Collect all the available raw CCD images available in fitz format </li>
-		<li> Obtain image meta data from the fitz header </li>
+		<li> Collect all the available raw CCD images available in fits format </li>
+		<li> Obtain image meta data from the fits header </li>
 		<li> Remove cosmic rays using specific image read-noise and gain per CCD </li>
 		<li> Identify astronomical objects in each image using parameters from meta-data extracted </li>
 		<li> Generate a catalog with a list of all identified objects per image and additional information to be later used in the classification work </li>
@@ -107,13 +107,11 @@ objlim=1 (contrast limit between cosmic rays and an underlying object) </code></
 	<p></p>
 	<p>Although the cosmics.py module accomplishes the cosmic ray defect removal very well for a single image, it does not work well for the 20K images available for processing due to time performance. CRBLASTER is an alternative implementation of the L.A.COSMIC algorithm written in the C language that employs an embarrassingly-parallel algorithm using the high-performance computing industry standard Message Passing Interface (MPI) library. As such, it is ideally suited to being implemented in a parallel-processing image-analysis application. </p>
 	
-	<p>The original package for CRBLASTER has hard-coded parameters including noise and gain. To obtain better results, we want to use specific parameter values obtained from the image meta-data. To achieve this, we patched the CRBLASTER application to accept parameters. The results for this customized version of the cosmic ray removal application obtained are equally effective as the python cosmics module as seen in the animation below:</p>
+	<p>The original package for CRBLASTER has hard-coded parameters including noise and gain. To obtain better results, we want to use specific parameter values obtained from the image meta-data. To achieve this, we patched the CRBLASTER application to accept parameters. The results for this customized version of the cosmic ray removal application obtained are equally effective as the python Cosmics module as seen in the animation below:</p>
 	
 	<center>
         	<img class="" src="images/crgif.gif" style="width:device-width;max-width:100%;margin:auto;display:inline"/>
         </center>
-	
-	
 	
 	
 	
@@ -123,7 +121,7 @@ objlim=1 (contrast limit between cosmic rays and an underlying object) </code></
 	
 	<p>SExtractor is a widely known software created by E. Bertin capable of detecting objects, extracting their flux (or magnitude) using a variety of different approaches and providing a rough classification of the identified objects using a star/non-star criteria (CLASS_STAR parameter; however, for faint objects, the confidence of classification is not very high).</p> 
 		
-	<p>In order to perform this task, SExtractor requires as input some paramaters given in every image as meta-data (CCD's gain, saturation, read noise, pixel scale and [stellar] FWHM), photometric zeropoint obtained (as a better calibration of the instrumental magnitude), in our particular case for DECam photometric calibration (http://www.ctio.noao.edu/noao/content/DECam-Photometric-Calibration) per CCD, and the filter that we are going to use for modeling a PSF according to the FWHM. </p>
+	<p>In order to perform this task, SExtractor requires as input some parameters given in every image as meta-data (CCD's gain, saturation, read noise, pixel scale and [stellar] FWHM), photometric zeropoint obtained (as a better calibration of the instrumental magnitude), in our particular case for DECam photometric calibration (http://www.ctio.noao.edu/noao/content/DECam-Photometric-Calibration) per CCD, and the filter that we are going to use for modeling a PSF according to the FWHM. </p>
 	
 	<p>The most important tasks in the workflow that SExtractor implements are the following:   </p>
 	
@@ -132,10 +130,10 @@ objlim=1 (contrast limit between cosmic rays and an underlying object) </code></
 		<p>SExtractor uses the parameter BACK_SIZE for estimating the background of the image as well as the RMS noise in that background. In our case, we use the default parameter given as 64 pixels because the average size of our objects in pixels is smaller than this value (in the worst case, it can be changed easily). The mean and the sigma of the background estimation are crucial for detection tasks.</p>
 		
 		<li><b>Additional Filtering:</b></li>
-		Before the detection, we apply a filter for smoothing the image to increase the signal-to-noise ratio and therefore helping to detect fainter objects. The decision of using a filter was driven by the fact that our images are not extremely crowded. Typically, the recommendation for filtering is to use the SExtractor 'canonical' filters; gaussian, tophat, mexhat, block (especially the gaussian ones because they are adequate to a star's PSF) and choose the one which has a similar FWHM compared to the images. 
+		Before the detection, we apply a filter for smoothing the image to increase the signal-to-noise ratio and therefore helping to detect fainter objects. The decision of using a filter was driven by the fact that our images are not extremely crowded. Typically, the recommendation for filtering is to use the SExtractor 'canonical' filters; Gaussian, tophat, mexhat, block (especially the Gaussian ones because they are adequate to a star's PSF) and choose the one which has a similar FWHM compared to the images. 
 		</p>
 		
-		<p>The first approach used to create a pipeline was to implement the idea explained above using SExtractor's gaussian filters (commented code in testfits.py). In the final iteration of our implementation we 'create' our own gaussians filters according to the precise FWHM of the images using a Python implementation of a MATLAB's  fspecial function for creating gaussian filters, obtained from:</p>
+		<p>The first approach used to create a pipeline was to implement the idea explained above using SExtractor's gaussian filters (commented code in testfits.py). In the final iteration of our implementation we 'create' our own gaussians filters according to the precise FWHM of the images using a Python implementation of a MATLAB's  fspecial function for creating Gaussian filters, obtained from:</p>
 <pre><code>import numpy as np
 
 def matlab_style_gauss2D(shape=(3,3),sigma=0.5):
@@ -177,7 +175,7 @@ def matlab_style_gauss2D(shape=(3,3),sigma=0.5):
 	<ul>
 		<li>Play with more values for thresholding and deblending and test them for improving the detection of faint and nearby objects, respectively.</li>
 		<li>Gaussian filters: we need to quantify the power of this tool and eventually 'create' the best PSF model for our images (replace the code of MATLAB).</li>
-		<li>Contacting E. Bertin for details in the calculation of magnitudes and gaussian filters.</li>
+		<li>Contacting E. Bertin for details in the calculation of magnitudes and Gaussian filters.</li>
 		<li>Using a full calibration for the magnitudes (even if in our case we are going to 'add' some constants).</li>
 
 	</ul>
@@ -192,7 +190,7 @@ STILTS (Starlink Tables Infrastructure Library Tool Set) is a command line inter
 	<p>The NLHPC is in place to provide a computing capacity in Chile meeting the national scientific demand for high performance computing (HPC).</p>
 	<p>The Leftraru cluster consists of 128 Nodes HP SL230 and four HP SL250, with 2640 cores Intel Ivy Bridge E5-2660V2, 12 Xeon Phi 5110p, and 5.4 TB of RAM, and a 56GB FDR connection with an available 274TB of storage.</p>
 	<p>The pipeline constructed by the group executes over 20.000 tasks, one per image, in which the images go through the process of cosmic ray removal (with the customized crblaster), then identification of objects, and extraction of the features and  generation of the output catalogs (with the adjusted SExtractor), and finally addition of the virtual observatory catalogs (generated with stilts).</p>
-	<p>The code for Leftraru was writen in slurm, and runs using a master python script that calls the individual subscripts which contain the sub processes for the tasks. The slurm code starts with a list of avialble image paths and proceeds to process each image in parallel. </p>
+	<p>The code for Leftraru was writen in slurm, and runs using a master python script that calls the individual subscripts which contain the sub processes for the tasks. The slurm code starts with a list of available image paths and proceeds to process each image in parallel. </p>
 	
         </div>  
 	</div>    
